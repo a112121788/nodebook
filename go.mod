@@ -15,7 +15,7 @@ require (
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gorilla/mux v1.7.3
 	github.com/joho/godotenv v1.3.0
-	github.com/markbates/pkger v0.14.0
+	github.com/markbates/pkger v0.17.1
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/pkg/errors v0.8.1
 	github.com/ttacon/chalk v0.0.0-20160626202418-22c06c80ed31
