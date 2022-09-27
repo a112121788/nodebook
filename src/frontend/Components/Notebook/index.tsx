@@ -59,7 +59,7 @@ export interface State {
 }
 
 export default class NotebookComponent extends React.Component<Props, State> {
-
+  
   props: Props;
   state: State = {
     autoclear: true,
@@ -68,7 +68,7 @@ export default class NotebookComponent extends React.Component<Props, State> {
     dragging: false,
     codeWidth: 60,
   };
-
+  
   private boundHandleKeyDown: EventListener;
   private boundHandleMouseUp: EventListener;
   private boundHandleMouseDown: EventListener;
@@ -77,9 +77,9 @@ export default class NotebookComponent extends React.Component<Props, State> {
   private entities: any;
   private ansiConvert: Convert;
   private console: HTMLElement;
-
+  
   private commWorker: Worker;
-
+  
   constructor(props: Props) {
     super(props);
     this.boundHandleKeyDown = this.handleKeyDown.bind(this);
@@ -91,20 +91,20 @@ export default class NotebookComponent extends React.Component<Props, State> {
     this.entities = new Entities();
     this.ansiConvert = new Convert();
   }
-
+  
   // Pleasing TS
   setState(s: Partial<State>) {
     super.setState(s);
   }
-
+  
   componentWillMount() {
     document.addEventListener('keydown', this.boundHandleKeyDown);
     document.addEventListener('mouseup', this.boundHandleMouseUp);
     document.addEventListener('mousemove', this.boundHandleMouseMove);
   }
-
+  
   componentDidMount() {
-
+    
     let i = 0;
     this.commWorker = new Worker('worker.ts');
     this.commWorker.onmessage = (e: MessageEvent) => {
@@ -121,38 +121,38 @@ export default class NotebookComponent extends React.Component<Props, State> {
         }
       }
     };
-
+    
     this.consoleLog('Ready.\n', 'info');
   }
-
+  
   componentWillUnmount() {
     this.commWorker.terminate();
     document.removeEventListener('keydown', this.boundHandleKeyDown);
   }
-
+  
   handleMouseDown(event) {
     this.setState({dragging: true});
   }
-
+  
   handleMouseUp(event) {
     this.setState({dragging: false});
   }
-
+  
   handleMouseMove(event) {
     if (this.state.dragging) {
       const percent = (event.pageX / window.innerWidth) * 100;
       this.setState({codeWidth: percent});
     }
   }
-
+  
   handleKeyDown(event) {
     if ((event.metaKey || event.ctrlKey) && event.keyCode === 13) {          // cmd + Enter
       event.preventDefault();
       this.execNotebook();
     } else if ((event.metaKey || event.ctrlKey) && event.key === 's') {      // cmd + S
-
+      
       const {persisturl} = this.props;
-
+      
       event.preventDefault();
       this.props.apiClient.persist(persisturl, this.editorvalue).then(() => this.execNotebook());
     } else if (event.ctrlKey && event.key === 'c') {    // ctrl+c
@@ -165,12 +165,12 @@ export default class NotebookComponent extends React.Component<Props, State> {
       this.execNotebook();
     }
   }
-
+  
   render() {
     const {notebook, homeurl, persisturl, content} = this.props;
     const {autoclear, newname, running, codeWidth} = this.state;
     const layoutStyle = {gridTemplateColumns: `${codeWidth}% 5px calc(${100 - codeWidth}% - 5px)`};
-
+    
     return (
       <div className="notebook-app">
         <div id="layout" style={layoutStyle}>
@@ -181,7 +181,7 @@ export default class NotebookComponent extends React.Component<Props, State> {
                 {running ? <span>Stop&nbsp;&nbsp;■</span> : <span>Run&nbsp;&nbsp;▶</span>}
               </button>
             </div>
-
+            
             <div id="notebook-header">
                             <span
                               contentEditable={true}
@@ -194,15 +194,17 @@ export default class NotebookComponent extends React.Component<Props, State> {
                             </span>
               <span className="notebook-recipe">{notebook.recipe.name}</span>
             </div>
-
+            
             <div id="console-options">
               <label><input type="checkbox" checked={autoclear} onChange={e => {
                 this.setState({autoclear: e.target.checked});
               }}/> Clear console every run</label>
             </div>
-
+            
             <div id="btn-home">
-              <button className="bigbutton" onClick={() => document.location.href = homeurl}>首页&nbsp;&nbsp;🏠</button>
+              <button className="bigbutton"
+                      onClick={() => document.location.href = homeurl}>首页&nbsp;&nbsp;🏠
+              </button>
             </div>
           </div>
           <div id="left">
@@ -219,7 +221,7 @@ export default class NotebookComponent extends React.Component<Props, State> {
                   indentUnit: 4,
                   scrollPastEnd: false,
                   keyMap: 'sublime',
-
+                  
                   extraKeys: {
                     "Tab": (cm) => cm.execCommand("indentMore"),
                     "Shift-Tab": (cm) => cm.execCommand("indentLess"),
@@ -242,17 +244,17 @@ export default class NotebookComponent extends React.Component<Props, State> {
       </div>
     );
   }
-
+  
   private sanitizeName(name: string) {
     if (typeof name !== 'string') throw new Error('The notebook name should be a string');
-
+    
     name = name.replace(/\.{2,}/g, '.').replace(/\\/g, '_').replace(/\//g, '_').replace(/[^a-zA-Z0-9àâäéèëêìïîùûüÿŷ\s-_\.]/g, '').replace(/\s+/g, ' ').trim();
-
+    
     if (name === '' || name[0] === '.') throw new Error('Invalid name');
-
+    
     return name;
   }
-
+  
   private onNotebookNameKeyDown(event) {
     if (event.keyCode == 13) { // Enter
       event.preventDefault();
@@ -260,20 +262,20 @@ export default class NotebookComponent extends React.Component<Props, State> {
       return;
     }
   }
-
+  
   private onNotebookNameChange(newname) {
     this.setState({newname});
   }
-
+  
   private onNotebookNameCommit() {
-
+    
     const {newname} = this.state;
     const {notebook, renamenotebookurl} = this.props;
-
+    
     if (newname === undefined) return;
-
+    
     // Sanitize name
-
+    
     let sanitizedName;
     try {
       sanitizedName = this.sanitizeName(newname);
@@ -282,28 +284,28 @@ export default class NotebookComponent extends React.Component<Props, State> {
       window.setTimeout(() => alert('Invalid name.'), 10);
       return;
     }
-
+    
     if (sanitizedName === notebook.name) {
       this.setState({newname: undefined});
       return;
     }
-
+    
     this.setState({newname: sanitizedName});
-
+    
     // Persist name change
-
+    
     return this.props.apiClient.rename(renamenotebookurl, sanitizedName)
       .then(res => res.json())
       .then(({url}) => document.location.href = url)
       .catch(_ => alert('Error: Notebook could not be renamed.'));
   }
-
+  
   private stopExecution() {
     const {running} = this.state;
     if (!running) return;
-
+    
     const {stopurl} = this.props;
-
+    
     return this.props.apiClient.stop(stopurl)
       .then(() => {
         this.consoleLog('--- Execution stopped.\n\n', 'info');
@@ -313,20 +315,20 @@ export default class NotebookComponent extends React.Component<Props, State> {
         alert('An error occured when stopping the current execution.');
       });
   }
-
+  
   private execNotebook() {
-
+    
     const {autoclear, running} = this.state;
     const {execurl} = this.props;
-
+    
     if (running) return;
-
+    
     this.setState({running: true});
-
+    
     if (autoclear) this.consoleClear();
-
+    
     this.consoleLog('--- Running...\n', 'info');
-
+    
     this.props.apiClient.getCsrfToken()
       .then((csrfToken) => {
         this.commWorker.postMessage({
@@ -336,22 +338,22 @@ export default class NotebookComponent extends React.Component<Props, State> {
         });
       })
   }
-
+  
   msgstack: any[] = []
-
+  
   consoleLog(msg: string, cls: string) {
     this.msgstack.push({msg, cls});
     window.requestAnimationFrame(() => {
       if (!this.msgstack.length) return;
-
+      
       const maxchilds = 300;
-
+      
       const allhtml = this.msgstack.map(m => {
         return '<span class="' + m.cls + '">' + this.ansiConvert.toHtml(this.entities.encode(m.msg)) + '</span>';
       }).join('');
-
+      
       this.console.innerHTML += allhtml;
-
+      
       const nbchilds = this.console.childElementCount;
       if (nbchilds > maxchilds) {
         for (let i = nbchilds - maxchilds; i >= 0; i--) {
@@ -362,12 +364,12 @@ export default class NotebookComponent extends React.Component<Props, State> {
         truncated.innerText = 'Output truncated (too big).\n';
         this.console.prepend(truncated);
       }
-
+      
       this.console.scrollTop = this.console.scrollHeight;
       this.msgstack = [];
     });
   }
-
+  
   consoleClear() {
     this.console.innerHTML = '';
   }

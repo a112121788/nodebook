@@ -10,7 +10,7 @@ class ApiClient implements ApiClientType {
       'Content-Type': 'application/json'
     }
   };
-
+  
   private post(url, body) {
     return this.getCsrfToken().then((csrfToken) => {
       const options = Object.assign({}, this.options, {
@@ -20,7 +20,7 @@ class ApiClient implements ApiClientType {
       return window.fetch(url, options);
     });
   }
-
+  
   getCsrfToken(): Promise<string> {
     if (this.csrfToken) return Promise.resolve(this.csrfToken);
     return window.fetch('/csrf')
@@ -30,26 +30,26 @@ class ApiClient implements ApiClientType {
         return this.csrfToken;
       })
   }
-
+  
   persist(url: string, content: string) {
     return this.post(url, {content});
   }
-
+  
   debouncedPersist(url: string, value: string) {
     clearTimeout(this.debounceTimeout);
     this.debounceTimeout = setTimeout(() => {
       this.persist(url, value)
     }, this.debounceWait);
   }
-
+  
   stop(url: string) {
     return this.post(url, {});
   }
-
+  
   rename(url: string, newname: string) {
     return this.post(url, {newname});
   }
-
+  
   create(url, recipekey) {
     return this.post(url, {recipekey});
   }
