@@ -1,7 +1,7 @@
 .PHONY: deps build install deps-frontend build-frontend embed-frontend
 
 deps:
-	go get github.com/markbates/pkger/cmd/pkger
+	go install github.com/markbates/pkger/cmd/pkger
 
 embed-frontend:
 	pkger

@@ -3,6 +3,9 @@
   "version": "0.1.31",
   "description": "Nodebook - Multi-Language REPL with web UI",
   "main": "dist/nodejs/backend/index.js",
+  "engines": {
+    "node": "16.x.x"
+  },
   "scripts": {
     "test": "",
     "build": "rm -Rf ../../dist && parcel build *.html --out-dir ../../dist/frontend && npm run test"
@@ -42,7 +45,7 @@
     "date-fns": "^2.9.0",
     "html-entities": "^1.2.1",
     "mocha": "^7.0.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^6.0.1",
     "nodemon": "^2.0.2",
     "parcel-bundler": "^1.12.4",
     "portfinder": "^1.0.25",
