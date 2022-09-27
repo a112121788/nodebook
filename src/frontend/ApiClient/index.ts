@@ -1,7 +1,4 @@
-import {
-  ApiClient as ApiClientType,
-  Notebook as NotebookType
-} from '../types';
+import {ApiClient as ApiClientType} from '../types';
 
 class ApiClient implements ApiClientType {
   private csrfToken: string;
@@ -18,7 +15,7 @@ class ApiClient implements ApiClientType {
     return this.getCsrfToken().then((csrfToken) => {
       const options = Object.assign({}, this.options, {
         method: 'POST',
-        body: JSON.stringify(Object.assign({}, body, { csrfToken }))
+        body: JSON.stringify(Object.assign({}, body, {csrfToken}))
       })
       return window.fetch(url, options);
     });
@@ -35,7 +32,7 @@ class ApiClient implements ApiClientType {
   }
 
   persist(url: string, content: string) {
-    return this.post(url, { content });
+    return this.post(url, {content});
   }
 
   debouncedPersist(url: string, value: string) {
@@ -50,11 +47,11 @@ class ApiClient implements ApiClientType {
   }
 
   rename(url: string, newname: string) {
-    return this.post(url, { newname });
+    return this.post(url, {newname});
   }
 
   create(url, recipekey) {
-    return this.post(url, { recipekey });
+    return this.post(url, {recipekey});
   }
 }
 

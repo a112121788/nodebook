@@ -14,8 +14,8 @@ install: embed-frontend
 	@echo "nodebook built and installed."
 
 deps-frontend:
-	cd src/frontend && npm i
+	cd src/frontend && yarn i
 
 build-frontend:
-	cd src/frontend && npm run build
+	cd src/frontend && yarn build
 	rm -Rf dist/frontend/*.map
