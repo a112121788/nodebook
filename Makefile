@@ -14,7 +14,7 @@ install: embed-frontend
 	@echo "nodebook built and installed."
 
 deps-frontend:
-	cd src/frontend && yarn i
+	cd src/frontend && yarn
 
 build-frontend:
 	cd src/frontend && yarn build

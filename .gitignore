@@ -6,3 +6,4 @@ src/core/core
 dist/nbk
 pkged.go
 /dist/nodebook
+/.idea/
