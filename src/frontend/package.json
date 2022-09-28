@@ -51,9 +51,9 @@
     "portfinder": "^1.0.32",
     "preact": "^10.11.0",
     "preact-compat": "^3.19.0",
-    "react": "^16.14.0",
+    "react": "^18.2.0",
     "react-codemirror2": "^7.2.1",
-    "react-dom": "^16.14.0",
+    "react-dom": "^18.2.0",
     "react-spinkit": "^3.0.0",
     "sass": "^1.55.0",
     "typescript": "^4.8.4"
