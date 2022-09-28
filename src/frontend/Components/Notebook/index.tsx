@@ -186,7 +186,7 @@ export default class NotebookComponent extends React.Component<Props, State> {
                             <span
                               contentEditable={true}
                               className="notebook-name"
-                              onBlur={e => this.onNotebookNameCommit()}
+                              onBlur={e => this.onNotebookNameCommit((e.target as HTMLElement).innerText)}
                               onInput={e => this.onNotebookNameChange((e.target as HTMLElement).innerText)}
                               onKeyDown={this.onNotebookNameKeyDown}
                             >
@@ -198,7 +198,7 @@ export default class NotebookComponent extends React.Component<Props, State> {
             <div id="console-options">
               <label><input type="checkbox" checked={autoclear} onChange={e => {
                 this.setState({autoclear: e.target.checked});
-              }}/> Clear console every run</label>
+              }}/> 每次运行时清除控制台</label>
             </div>
             
             <div id="btn-home">
@@ -255,7 +255,7 @@ export default class NotebookComponent extends React.Component<Props, State> {
     return name;
   }
   
-  private onNotebookNameKeyDown(event) {
+  private onNotebookNameKeyDown(event: { keyCode: number; preventDefault: () => void; }) {
     if (event.keyCode == 13) { // Enter
       event.preventDefault();
       this.onNotebookNameCommit();
@@ -264,12 +264,12 @@ export default class NotebookComponent extends React.Component<Props, State> {
   }
   
   private onNotebookNameChange(newname) {
-    this.setState({newname});
+    // this.setState({newname});
   }
   
-  private onNotebookNameCommit() {
+  private onNotebookNameCommit(newname) {
     
-    const {newname} = this.state;
+    // const {newname} = this.state;
     const {notebook, renamenotebookurl} = this.props;
     
     if (newname === undefined) return;
