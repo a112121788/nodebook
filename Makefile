@@ -1,21 +1,16 @@
-.PHONY: deps build install deps-frontend build-frontend embed-frontend
+.PHONY: frontend-install frontend-build build install 
 
-deps:
-	go install github.com/markbates/pkger/cmd/pkger
-
-embed-frontend:
-	pkger
-
-build: embed-frontend
-	go build -o dist/nodebook .
-
-install: embed-frontend
-	go install .
-	@echo "nodebook built and installed."
-
-deps-frontend:
+frontend-install:
 	cd src/frontend && yarn
 
-build-frontend:
+frontend-build:
 	cd src/frontend && yarn build
 	rm -Rf dist/frontend/*.map
+
+
+build:
+	go build -o dist/nodebook .
+
+# install: 
+# 	go install .
+# 	@echo "nodebook built and installed."

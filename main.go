@@ -1,18 +1,23 @@
 package main
 
 import (
+	"embed"
+	_ "embed"
 	"fmt"
 	"os"
 	"path/filepath"
 
 	"github.com/alecthomas/kingpin"
-	"github.com/markbates/pkger"
 	"github.com/netgusto/nodebook/src/core"
 	"github.com/pkg/errors"
 )
 
-var _ = pkger.Include("/dist/frontend/")
-var _ = pkger.Include("/src/recipes/")
+// var _ = pkger.Include("/dist/frontend/")
+// var _ = pkger.Include("/src/recipes/")
+
+//go:embed dist/frontend/*
+//go:embed src/recipes/*/*
+var _ embed.FS
 
 func main() {
 

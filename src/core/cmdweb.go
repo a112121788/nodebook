@@ -30,7 +30,7 @@ func WebRun(notebookspath string, docker bool, bindaddress string, port int) {
 		docker,
 	)
 
-	fmt.Printf("nbk listening on http://%s:%d\n", bindaddress, port)
+	fmt.Printf("nodebook listening on http://%s:%d\n", bindaddress, port)
 	srv := &http.Server{
 		Handler:     api,
 		Addr:        fmt.Sprintf("%s:%d", bindaddress, port),
