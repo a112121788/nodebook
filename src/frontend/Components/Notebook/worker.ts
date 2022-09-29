@@ -83,7 +83,7 @@ function execAction(url: string, csrfToken: string) {
         });
       }
     })
-    .then(({ hasLastNewLine }) => {
+    .then((hasLastNewLine) => {
       if (!hasLastNewLine) {
         consoleLogIfRunning('%\n', 'forcednl');
       }

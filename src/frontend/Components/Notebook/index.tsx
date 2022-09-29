@@ -60,7 +60,7 @@ export interface State {
 
 export default class NotebookComponent extends React.Component<Props, State> {
 
-  props: Props;
+  // props: Props;
   state: State = {
     autoclear: true,
     newname: undefined,
@@ -93,7 +93,7 @@ export default class NotebookComponent extends React.Component<Props, State> {
   }
 
   // Pleasing TS
-  setState(s: Partial<State>) {
+  setState(s:any) {
     super.setState(s);
   }
 
@@ -130,22 +130,22 @@ export default class NotebookComponent extends React.Component<Props, State> {
     document.removeEventListener('keydown', this.boundHandleKeyDown);
   }
 
-  handleMouseDown(event) {
+  handleMouseDown(event: any) {
     this.setState({ dragging: true });
   }
 
-  handleMouseUp(event) {
+  handleMouseUp(event: any) {
     this.setState({ dragging: false });
   }
 
-  handleMouseMove(event) {
+  handleMouseMove(event: { pageX: number; }) {
     if (this.state.dragging) {
       const percent = (event.pageX / window.innerWidth) * 100;
       this.setState({ codeWidth: percent });
     }
   }
 
-  handleKeyDown(event) {
+  handleKeyDown(event: { metaKey: any; ctrlKey: any; keyCode: number; preventDefault: () => void; key: string; }) {
     if ((event.metaKey || event.ctrlKey) && event.keyCode === 13) {          // cmd + Enter
       event.preventDefault();
       this.execNotebook();
@@ -223,13 +223,13 @@ export default class NotebookComponent extends React.Component<Props, State> {
                   keyMap: 'sublime',
 
                   extraKeys: {
-                    "Tab": (cm) => cm.execCommand("indentMore"),
-                    "Shift-Tab": (cm) => cm.execCommand("indentLess"),
-                    "Cmd-Enter": (cm) => {
+                    "Tab": (cm: { execCommand: (arg0: string) => any; }) => cm.execCommand("indentMore"),
+                    "Shift-Tab": (cm: { execCommand: (arg0: string) => any; }) => cm.execCommand("indentLess"),
+                    "Cmd-Enter": (cm: any) => {
                     },
                   }
                 }}
-                onChange={(_, __, value) => {
+                onChange={(_: any, __: any, value: string) => {
                   this.editorvalue = value;
                   this.props.apiClient.debouncedPersist(persisturl, value);
                 }}
@@ -263,11 +263,11 @@ export default class NotebookComponent extends React.Component<Props, State> {
     }
   }
 
-  private onNotebookNameChange(newname) {
+  private onNotebookNameChange(newname: string) {
     // this.setState({newname});
   }
 
-  private onNotebookNameCommit(newname) {
+  private onNotebookNameCommit(newname?: string) {
 
     // const {newname} = this.state;
     const { notebook, renamenotebookurl } = this.props;

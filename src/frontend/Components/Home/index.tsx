@@ -45,14 +45,14 @@ export default class Home extends React.Component<Props, State> {
     creating: false,
   };
 
-  props: Props;
+  declare props: Props;
 
   render() {
 
     const { notebooks, recipes } = this.props;
     const { menuopen, creating } = this.state;
 
-    const recents = [];
+    const recents: NotebookHandle[] = [];
     const horizon = subDays(new Date(), 1);
 
     notebooks.forEach(notebook => {
