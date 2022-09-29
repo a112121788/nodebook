@@ -1,11 +1,13 @@
 $yellowcolor: #FFC312;
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%
 }
 
-html.notebook, html.notebook body {
+html.notebook,
+html.notebook body {
   overflow-y: hidden
 }
 
@@ -42,7 +44,8 @@ body {
   padding: 10px;
   font-size: 18px;
 
-  &, a {
+  &,
+  a {
     color: white;
 
     &:visited {
@@ -126,7 +129,7 @@ body {
     display: grid;
     grid-template-rows: 50px auto;
     grid-template-areas: 'top top top'
-                             'code gutter console';
+      'code gutter console';
   }
 
   #top {

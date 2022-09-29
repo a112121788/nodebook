@@ -4,14 +4,14 @@ import subDays from 'date-fns/subDays';
 import isBefore from 'date-fns/isBefore';
 import Spinner from 'react-spinkit';
 
-import {ApiClient, NotebookHandle, Recipe} from "../../types";
+import { ApiClient, NotebookHandle, Recipe } from "../../types";
 
 interface NotebooksListProps {
   notebooks: NotebookHandle[];
 }
 
 function NotebooksList(props: NotebooksListProps) {
-  const {notebooks} = props;
+  const { notebooks } = props;
   return (
     <div className="notebook-list">
       <ul>
@@ -39,79 +39,79 @@ interface State {
 }
 
 export default class Home extends React.Component<Props, State> {
-  
+
   state: State = {
     menuopen: false,
     creating: false,
   };
-  
+
   props: Props;
-  
+
   render() {
-    
-    const {notebooks, recipes} = this.props;
-    const {menuopen, creating} = this.state;
-    
+
+    const { notebooks, recipes } = this.props;
+    const { menuopen, creating } = this.state;
+
     const recents = [];
     const horizon = subDays(new Date(), 1);
-    
+
     notebooks.forEach(notebook => {
       if (!isBefore(new Date(notebook.mtime), horizon)) {
         recents.push(notebook);
       }
     });
-    
+
     recents.sort((a, b) => a.mtime > b.mtime ? -1 : 1);
-    
+
     const showTitle = recents.length > 0;
-    
+
     return (
       <div className="home-app">
-        
+
         <div className="list">
           {recents.length > 0 && (
             <div>
               <h2>最近</h2>
-              <NotebooksList notebooks={recents}/>
+              <NotebooksList notebooks={recents} />
             </div>
           )}
-          
+
           {notebooks.length > 0 && notebooks.length > recents.length && (
             <div>
               {showTitle && <h2>全部</h2>}
-              <NotebooksList notebooks={notebooks}/>
+              <NotebooksList notebooks={notebooks} />
             </div>
           )}
         </div>
-        
+
         <div className="tools">
-          <button className={cx('bigbutton', 'btn-new', {creating})}
-                  onClick={() => (this as any).setState({menuopen: !menuopen})}>
-            {creating ? <Spinner fadeIn="none" name="wave" color="white"/> : (
+          <button className={cx('bigbutton', 'btn-new', { creating })}
+            onClick={() => (this as any).setState({ menuopen: !menuopen })}>
+            {creating ? <Spinner fadeIn="none" name="wave" color="white" /> : (
               <span>{menuopen ? '-' : '+'} 笔记本</span>
             )}
           </button>
           {menuopen && (
             <div className="recipe-list">{recipes.map(recipe => (
               <span key={recipe.key} className="recipe-item"
-                    onClick={() => this.selectRecipe(recipe.key)}>{recipe.name}</span>
+                onClick={() => this.selectRecipe(recipe.key)}>{recipe.name}</span>
             ))}</div>
           )}
         </div>
       </div>
     );
   }
-  
+
   private selectRecipe(recipekey: string) {
-    const {newnotebookurl} = this.props;
-    const {creating} = this.state;
+    const { newnotebookurl } = this.props;
+    const { creating } = this.state;
     if (creating) return;
-    
-    (this as any).setState({creating: true});
-    
+
+    (this as any).setState({ creating: true });
+
     this.props.apiClient.create(newnotebookurl, recipekey)
       .then(res => res.json())
-      .then(({url}) => {
+      .then(({ url }) => {
         document.location.href = url;
       })
       .catch(_ => {

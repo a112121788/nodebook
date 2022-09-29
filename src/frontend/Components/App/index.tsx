@@ -8,8 +8,8 @@ import {
   Route as RouteType
 } from "../../types";
 
-import Home, {Props as HomeProps} from "../Home";
-import Notebook, {Props as NotebookProps} from "../Notebook";
+import Home, { Props as HomeProps } from "../Home";
+import Notebook, { Props as NotebookProps } from "../Notebook";
 
 
 interface Props {
@@ -28,7 +28,7 @@ interface Props {
 }
 
 export default function (props: Props) {
-  const {route} = props;
+  const { route } = props;
   const NB = Notebook as any;
   switch (route) {
     case "home":

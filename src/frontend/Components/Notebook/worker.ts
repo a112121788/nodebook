@@ -25,7 +25,7 @@ function notifyExecEnded() {
 function execAction(url: string, csrfToken: string) {
   return fetch(url, {
     method: 'POST',
-    body: JSON.stringify({csrfToken}),
+    body: JSON.stringify({ csrfToken }),
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -34,22 +34,22 @@ function execAction(url: string, csrfToken: string) {
     .then(res => {
       if (!res.body) {
         // response not streamable; use it in one piece
-        
+
         let hasLastNewLine = true;
         return res.text()
           .then(text => {
             text.split('\n').map(jsonline => {
-              
+
               if (jsonline.trim().length === 0) return;
-              
+
               const data = JSON.parse(jsonline);
               const txt = JSON.parse(data.data);
               const lastnl = txt.lastIndexOf('\n');
               hasLastNewLine = (lastnl === txt.length - 1);
               consoleLogIfRunning(txt, data.chan);
             });
-            
-            return {hasLastNewLine};
+
+            return { hasLastNewLine };
           });
       } else {
         return new Promise((resolve, reject) => {
@@ -57,37 +57,37 @@ function execAction(url: string, csrfToken: string) {
           const decoder = new TextDecoder("utf-8");
           let hasLastNewLine = true;
           const pump = () => {
-            reader.read().then(({done, value}) => {
+            reader.read().then(({ done, value }) => {
               if (done) {
-                resolve({hasLastNewLine});
+                resolve({ hasLastNewLine });
                 return;
               }
-              
+
               decoder.decode(value).split('\n').map(jsonline => {
-                
+
                 if (jsonline.trim().length === 0) return;
-                
+
                 const data = JSON.parse(jsonline);
                 const txt = JSON.parse(data.data);
                 const lastnl = txt.lastIndexOf('\n');
                 hasLastNewLine = (lastnl === txt.length - 1);
                 consoleLogIfRunning(txt, data.chan);
               });
-              
+
               // Get the data and send it to the browser via the controller
               pump();
             });
           }
-          
+
           pump();
         });
       }
     })
-    .then(({hasLastNewLine}) => {
+    .then(({ hasLastNewLine }) => {
       if (!hasLastNewLine) {
         consoleLogIfRunning('%\n', 'forcednl');
       }
-      
+
       consoleLogIfRunning('--- Done.\n\n', 'info');
       notifyExecEnded();
     })
