@@ -3,7 +3,7 @@ import { ApiClient as ApiClientType } from '../types';
 class ApiClient implements ApiClientType {
   private csrfToken: string;
   private debounceWait = 400;
-  private debounceTimeout;
+  private debounceTimeout: string | number | NodeJS.Timeout;
   private options = {
     headers: {
       'Accept': 'application/json',
@@ -11,7 +11,7 @@ class ApiClient implements ApiClientType {
     }
   };
 
-  private post(url, body) {
+  private post(url: RequestInfo | URL, body: { content?: string; newname?: string; recipekey?: any; }) {
     return this.getCsrfToken().then((csrfToken) => {
       const options = Object.assign({}, this.options, {
         method: 'POST',
@@ -50,7 +50,7 @@ class ApiClient implements ApiClientType {
     return this.post(url, { newname });
   }
 
-  create(url, recipekey) {
+  create(url: RequestInfo | URL, recipekey: string) {
     return this.post(url, { recipekey });
   }
 }

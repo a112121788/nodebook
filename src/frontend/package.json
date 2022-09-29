@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "",
+    "dev": "parcel index.html",
     "build": "rm -Rf ../../dist && parcel build index.html --out-dir ../../dist/frontend && npm run test"
   },
   "author": "@netgusto",
