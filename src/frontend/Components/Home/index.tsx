@@ -71,14 +71,14 @@ export default class Home extends React.Component<Props, State> {
         <div className="list">
           {recents.length > 0 && (
             <div>
-              <h2>最近</h2>
+              <h2>最近({recents.length})</h2>
               <NotebooksList notebooks={recents} />
             </div>
           )}
 
           {notebooks.length > 0 && notebooks.length > recents.length && (
             <div>
-              {showTitle && <h2>全部</h2>}
+              {showTitle && <h2>全部({notebooks.length})</h2>}
               <NotebooksList notebooks={notebooks} />
             </div>
           )}

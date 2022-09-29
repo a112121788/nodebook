@@ -1,9 +1,7 @@
 node_modules
 .cache
-/dist/frontend/*.map
 .DS_Store
 src/core/core
-dist/nbk
 pkged.go
-/dist/nodebook
+/dist/
 /.idea/
