@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/a112121788/nodebook/src/core"
 	"github.com/alecthomas/kingpin"
-	"github.com/netgusto/nodebook/src/core"
 	"github.com/pkg/errors"
 )
 

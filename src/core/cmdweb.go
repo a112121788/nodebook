@@ -7,8 +7,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/netgusto/nodebook/src/core/shared"
-	"github.com/netgusto/nodebook/src/core/shared/service"
+	"github.com/a112121788/nodebook/src/core/shared"
+	"github.com/a112121788/nodebook/src/core/shared/service"
 )
 
 func WebRun(notebookspath string, docker bool, bindaddress string, port int) {

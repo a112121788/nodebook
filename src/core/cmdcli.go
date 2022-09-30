@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/netgusto/nodebook/src/core/shared"
-	"github.com/netgusto/nodebook/src/core/shared/service"
-	"github.com/netgusto/nodebook/src/core/shared/types"
+	"github.com/a112121788/nodebook/src/core/shared"
+	"github.com/a112121788/nodebook/src/core/shared/service"
+	"github.com/a112121788/nodebook/src/core/shared/types"
 	pkgErrors "github.com/pkg/errors"
 	"github.com/ttacon/chalk"
 )

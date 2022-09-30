@@ -11,7 +11,7 @@
     "dev": "parcel index.html",
     "build": "rm -Rf ../../dist && parcel build index.html --out-dir ../../dist/frontend && npm run test"
   },
-  "author": "@netgusto",
+  "author": "@a112121788",
   "license": "ISC",
   "dependencies": {
     "@octokit/rest": "^18.12.0",

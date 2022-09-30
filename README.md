@@ -45,7 +45,7 @@ Otherwise, the local toolchains will be used.
 
 ## Install from release
 
-Head to [Releases](https://github.com/netgusto/nodebook/releases/latest) and download the binary built for your system (mac, linux).
+Head to [Releases](https://github.com/a112121788/nodebook/releases/latest) and download the binary built for your system (mac, linux).
 
 Rename it to `nodebook` and place it in your path.
 

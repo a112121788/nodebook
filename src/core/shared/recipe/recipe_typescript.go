@@ -4,8 +4,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/netgusto/nodebook/src/core/shared/recipe/helper"
-	"github.com/netgusto/nodebook/src/core/shared/types"
+	"github.com/a112121788/nodebook/src/core/shared/recipe/helper"
+	"github.com/a112121788/nodebook/src/core/shared/types"
 )
 
 func Typescript() types.Recipe {

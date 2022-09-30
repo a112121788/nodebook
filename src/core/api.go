@@ -3,10 +3,10 @@ package core
 import (
 	"net/http"
 
+	"github.com/a112121788/nodebook/src/core/httphandler"
+	"github.com/a112121788/nodebook/src/core/shared/service"
 	"github.com/gorilla/mux"
 	"github.com/markbates/pkger"
-	"github.com/netgusto/nodebook/src/core/httphandler"
-	"github.com/netgusto/nodebook/src/core/shared/service"
 )
 
 func makeAPI(

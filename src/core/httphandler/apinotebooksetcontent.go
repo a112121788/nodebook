@@ -7,9 +7,9 @@ import (
 	"os"
 	"strings"
 
+	"github.com/a112121788/nodebook/src/core/shared/service"
+	"github.com/a112121788/nodebook/src/core/shared/types"
 	"github.com/gorilla/mux"
-	"github.com/netgusto/nodebook/src/core/shared/service"
-	"github.com/netgusto/nodebook/src/core/shared/types"
 	pkgErrors "github.com/pkg/errors"
 )
 

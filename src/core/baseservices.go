@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/netgusto/nodebook/src/core/shared/recipe"
-	"github.com/netgusto/nodebook/src/core/shared/service"
+	"github.com/a112121788/nodebook/src/core/shared/recipe"
+	"github.com/a112121788/nodebook/src/core/shared/service"
 	pkgErrors "github.com/pkg/errors"
 )
 

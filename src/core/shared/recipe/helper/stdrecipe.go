@@ -3,7 +3,7 @@ package helper
 import (
 	"io"
 
-	"github.com/netgusto/nodebook/src/core/shared/types"
+	"github.com/a112121788/nodebook/src/core/shared/types"
 )
 
 type cmdBuilderFunc = func(types.Notebook) []string

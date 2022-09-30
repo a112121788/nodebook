@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/a112121788/nodebook/src/core/shared/service"
+	"github.com/a112121788/nodebook/src/core/shared/types"
 	"github.com/markbates/pkger"
-	"github.com/netgusto/nodebook/src/core/shared/service"
-	"github.com/netgusto/nodebook/src/core/shared/types"
 )
 
 type HTTPHandler = func(res http.ResponseWriter, req *http.Request)

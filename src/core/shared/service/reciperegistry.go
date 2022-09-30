@@ -3,7 +3,7 @@ package service
 import (
 	"errors"
 
-	"github.com/netgusto/nodebook/src/core/shared/types"
+	"github.com/a112121788/nodebook/src/core/shared/types"
 )
 
 type RecipeRegistry struct {

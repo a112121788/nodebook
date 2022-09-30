@@ -1,4 +1,4 @@
-module github.com/netgusto/nodebook
+module github.com/a112121788/nodebook
 
 go 1.19
 
