@@ -12,5 +12,5 @@ build:
 	go build -o dist/nodebook .
 
 install: 
-	go install .
+	mv dist/nodebook /usr/local/bin/
 	@echo "nodebook built and installed."
