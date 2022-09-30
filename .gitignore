@@ -3,5 +3,5 @@ node_modules
 .DS_Store
 src/core/core
 pkged.go
-/dist/
 /.idea/
+/dist/nodebook
