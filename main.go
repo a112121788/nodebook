@@ -17,6 +17,7 @@ import (
 
 //go:embed dist/frontend/*
 //go:embed src/recipes/*/*
+
 var _ embed.FS
 
 func main() {

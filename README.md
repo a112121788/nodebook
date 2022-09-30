@@ -4,7 +4,7 @@ Nodebook - Multi-Language REPL with Web UI + CLI code runner
 
 Useful to practice algorithms and datastructures for coding interviews.
 
-## What is it?
+## 简介
 
 Nodebook is an in-browser REPL supporting many programming languages. Code's on the left, Console's on the right. Click "Run" or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd> or <kbd>Cmd</kbd>+<kbd>Enter</kbd> to run your code.
 Code is automatically persisted on the file system.
@@ -17,7 +17,7 @@ A notebook is a folder containing an `{index|main}.{js,py,c,cpp,...}` file. The 
 
 ![home](https://user-images.githubusercontent.com/4974818/45383977-fde05380-b60c-11e8-91cc-06548dd4fae8.png)
 
-## Supported environments
+## 支持的环境
 
 * C11 `(.c)`
 * C++14 `(.cpp)`
@@ -43,18 +43,13 @@ If `--docker` is set on the command line, each of these environments will run in
 
 Otherwise, the local toolchains will be used.
 
-## Install from release
 
-Head to [Releases](https://github.com/a112121788/nodebook/releases/latest) and download the binary built for your system (mac, linux).
-
-Rename it to `nodebook` and place it in your path.
-
-## Install from source
+## 从源码安装
 
 Building requires go.
 
 ```bash
-$ make deps
+$ make build
 $ make install
 # nodebook should be available under $GOPATH/bin/nodebook or $GOBIN/nodebook
 ```
@@ -114,7 +109,7 @@ HELLO=World!
 
 More information about the expected file format here: <https://github.com/motdotla/dotenv#rules>
 
-## ⚠️ A bit of warning ⚠️
+## ⚠️ 一点警告 ⚠️
 
 Do not run the Web UI on a port open to public traffic! Doing so would allow remote code execution on your machine.
 

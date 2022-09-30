@@ -11,6 +11,6 @@ frontend-build:
 build:
 	go build -o dist/nodebook .
 
-# install: 
-# 	go install .
-# 	@echo "nodebook built and installed."
+install: 
+	go install .
+	@echo "nodebook built and installed."
